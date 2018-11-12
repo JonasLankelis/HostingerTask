@@ -15,24 +15,29 @@
 	  		<div class="panel-body">
 	  			<div class="row">
 	  				<div class="col-md-6">
-	  					<h3>Recursive Category List</h3>
-				        <ul id="tree1">
-				            @foreach($categories as $category)
+	  					<h3>Iterative Category List</h3>
+                                            <ul id="tree1">
+                                            @for ($i = 0; $i < count($categories); $i++)
+                                                @if(count($categories[$i]->childs)>1)
+                                                 <li>
+                                                    {{ $categories[$i]->cat_name }}
+                                                    @include('manageChild',['childs' => $categories[$i]->sorted])
+                                                 </li>
+                                                @else
                                                 <li>
-                                                    {{ $category->cat_name }}
-				                    @if(count($category->childs))
-				                        @include('manageChild',['childs' => $category->childs])
-				                    @endif
+                                                    {{ $categories[$i]->cat_name }}
                                                 </li>
-				            @endforeach
+                                                @endif
+                                            @endfor
 				        </ul>
 	  				</div>
-	  				@include('addCategory')
+	  			@include('addCategory')
+	  			</div>
 
 	  			
 	  		</div>
         </div>
-           @Jonas Lankelis, 2018
+          @Jonas Lankelis, 2018 
     </div>
     <script src="/js/treeview.js"></script>
 </body>

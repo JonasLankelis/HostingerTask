@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/', ['uses'=>'CatController@recursiveTree']);
-Route::get('recursiveTree',['uses'=>'CatController@manageCategory']);
+Route::get('/', function(){
+
+    return view('layout');
+});
+Route::get('/recursiveTree',['uses'=>'CatController@recursiveTree']);
+
+Route::get('/iterativeTree',['uses'=>'CatController@iterativeTree']);
 /*{
     return View::make('layout');
 });*/

@@ -55,6 +55,10 @@ class CatController extends Controller
         return view('recursiveTree',compact('categories','allCategories'));
     }
     
+    
+    /*
+     * Source: https://stackoverflow.com/questions/29384548/php-how-to-build-tree-structure-list
+     */
     public function createRecursive($categories, $parent_id)
     {
         $branch = array();
@@ -69,4 +73,15 @@ class CatController extends Controller
         }
         return $branch;
     }
+    
+    public function iterativeTree()
+    {
+        $categories = Category::where('parent_id', '=', NULL)->orderBy('cat_name','ASC')->get();
+        $allCategories = Category::all();
+        
+        
+        
+        return view('iterativeTree',compact('categories','allCategories'));
+    }
+
 }

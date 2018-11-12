@@ -20,7 +20,11 @@ class Category extends Model
     ];
     
     public function childs() {
-        return $this->hasMany('App\Category','parent_id','id') ;
+        return $this->hasMany('App\Category','parent_id','id');
+    }
+    
+    public function sorted() {
+        return $this->childs()->orderBy('cat_name','DESC');
     }
     
     function saves(string $name, $id)
@@ -67,6 +71,5 @@ class Category extends Model
             ['parent_id', '=', $id]
         ])->exists();
     }
-    
 
 }
